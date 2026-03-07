@@ -1,0 +1,12 @@
+{{ config(
+    materialized = 'table',
+    schema = 'dw_oliver'
+) }}
+SELECT
+    store_id AS store_key,
+    store_id AS storeid,
+    store_name,
+    street,
+    city,
+    state
+FROM {{ source('oliver_landing', 'store') }}

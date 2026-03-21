@@ -1,0 +1,20 @@
+version: 2
+models:
+  - name: oliver_dim_customer
+    description: "Oliver's Customer Dimension"
+  - name: oliver_dim_date
+    description: "Oliver's Date Dimension"
+  - name: oliver_dim_employee
+    description: "Oliver's Employee Dimension"
+  - name: oliver_dim_product
+    description: "Oliver's Product Dimension"
+  - name: oliver_dim_store
+    description: "Oliver's Store Dimension"
+  - name: fact_sales
+    description: "Oliver's Sales Fact Table"
+  - name: sales
+    description: "Oliver's Semantic Layer for Sales Analysis"
+  - name: stg_employee_certifications
+    description: "Staging model for employee certification data sourced from S3. Parses the certification_json field into individual columns including certification_name, certification_cost, and certification_awarded_date."
+  - name: fact_certification
+    description: "Oliver's Certification Fact Table. The grain of this fact table is one record per employee per certification received, containing the date the certification was awarded, the employee who received it, the name of the certification, and its cost."

@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: oliver_landing
+  - name: oliver
     database: ZachSpeck
     schema: oliver_dw_source
     tables:

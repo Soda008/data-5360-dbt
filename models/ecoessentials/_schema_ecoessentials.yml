@@ -75,3 +75,11 @@ models:
               arguments:
                 to: ref('dim_email_eco')
                 field: email_key
+  
+  - name: dim_time
+    description: "Time dimension derived from marketing email event timestamps."
+    columns:
+      - name: time_key
+        tests:
+          - unique
+          - not_null

@@ -1,0 +1,21 @@
+version: 2
+
+sources:
+  - name: rds_source
+    database: ZACHSPECK
+    # This matches the long schema name Fivetran created for your RDS sync
+    schema: ECOESSENTIALS_TRANSACTIONAL_ECOESSENTIALS_TRANSACTIONAL_DB
+    tables:
+      - name: CUSTOMER
+      - name: ORDER
+        identifier: '"ORDER"'  # Keeps the quotes for the reserved keyword
+      - name: ORDER_LINE
+      - name: PRODUCT
+      - name: PROMOTIONAL_CAMPAIGN
+
+  - name: s3_source
+    database: ZACHSPECK
+    # This matches where your S3 data landed
+    schema: ECOESSENTIALS_TRANSACTIONAL
+    tables:
+      - name: marketingemails

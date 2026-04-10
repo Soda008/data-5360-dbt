@@ -1,0 +1,25 @@
+version: 2
+
+models:
+  - name: stg_marketingemails
+    description: "Staging model for Salesforce Marketing Cloud email events from S3. Excludes Fivetran metadata columns."
+  - name: dim_customer_eco
+    description: "Customer dimension combining transactional database and marketing email subscriber data."
+  - name: dim_product_eco
+    description: "Product dimension from the transactional database. Price excluded as it belongs in fact tables."
+  - name: dim_campaign_eco
+    description: "Conformed campaign dimension combining promotional campaigns from the transactional database and email campaigns from S3."
+  - name: dim_email_eco
+    description: "Email dimension containing unique emails sent via Salesforce Marketing Cloud."
+  - name: dim_event_eco
+    description: "Event type dimension for marketing email events."
+  - name: dim_date_eco
+    description: "Date dimension spanning 1990 to 2050."
+  - name: fact_sales_eco
+    description: |
+      Sales fact table. The grain of this table is one row per order line item.
+      Contains keys to dim_customer_eco, dim_product_eco, dim_campaign_eco, and dim_date_eco.
+  - name: fact_email_event_eco
+    description: |
+      Email event fact table. The grain of this table is one row per email event per subscriber.
+      Contains keys to dim_customer_eco, dim_campaign_eco, dim_email_eco, dim_event_eco, and dim_date_eco.

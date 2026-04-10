@@ -1,0 +1,85 @@
+version: 2
+
+models:
+  - name: stg_marketingemails
+    description: "Staging model for Salesforce Marketing Cloud email events from S3."
+    columns:
+      - name: emaileventid
+        tests:
+          - not_null
+
+  - name: dim_customer_eco
+    description: "Customer dimension."
+    columns:
+      - name: customer_key
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_product_eco
+    description: "Product dimension."
+    columns:
+      - name: product_id
+        tests:
+          - unique
+
+  - name: dim_campaign_eco
+    description: "Conformed campaign dimension."
+    columns:
+      - name: campaign_id
+        tests:
+          - not_null
+
+  - name: dim_email_eco
+    description: "Email dimension."
+    columns:
+      - name: emailid
+        tests:
+          - unique
+
+  - name: dim_event_eco
+    description: "Event type dimension."
+    columns:
+      - name: event_type
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['SENT', 'CLICK', 'OPEN']
+
+  - name: dim_date_eco
+    description: "Date dimension."
+    columns:
+      - name: date_key
+        tests:
+          - unique
+
+  - name: fact_sales_eco
+    description: "Sales fact table."
+    columns:
+      - name: sales_key
+        tests:
+          - unique
+      - name: customer_key
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_customer_eco')
+                field: customer_key
+
+  - name: fact_email_event_eco
+    description: "Email event fact table."
+    columns:
+      - name: email_key
+        tests:
+          - relationships:
+              arguments:
+                to: ref('dim_email_eco')
+                field: email_key
+  
+  - name: dim_time
+    description: "Time dimension derived from marketing email event timestamps."
+    columns:
+      - name: time_key
+        tests:
+          - unique
+          - not_null

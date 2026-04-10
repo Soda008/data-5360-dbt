@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: rds_source
+    database: ZACHSPECK
+    schema: ECOESSENTIALS_TRANSACTIONAL_ECOESSENTIALS_TRANSACTIONAL_DB
+    tables:
+      - name: CUSTOMER
+      - name: ORDER
+        identifier: '"ORDER"'
+      - name: ORDER_LINE
+      - name: PRODUCT
+      - name: PROMOTIONAL_CAMPAIGN
+
+  - name: s3_source
+    database: ZACHSPECK
+    schema: ECOESSENTIALS_TRANSACTIONAL
+    tables:
+      - name: marketingemails
